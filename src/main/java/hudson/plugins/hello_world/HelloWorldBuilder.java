@@ -171,8 +171,10 @@ public class HelloWorldBuilder extends Builder {
             System.out.println("--- doFillCityItems, state: "+state);
 
             ListBoxModel m = new ListBoxModel();
-            if (state == null || state.equals(""))
+            if (state == null || state.equals("")) {
+                fillDefaultCityItems(m);
                 return m;
+            }
 
             for (String s : asList("1","2","3")) {
                 m.add(String.format("City %s in %s", s, state), state + ':' + s);
@@ -180,6 +182,12 @@ public class HelloWorldBuilder extends Builder {
 
 
             return m;
+        }
+
+        private void fillDefaultCityItems(ListBoxModel m) {
+            for (String s : asList("1","2","3")) {
+                m.add(String.format("City %s in %s", s, "A"), "A" + ':' + s);
+            }
         }
 
     }
